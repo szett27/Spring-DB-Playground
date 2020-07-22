@@ -4,6 +4,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -54,6 +57,19 @@ public class LessonsController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return null;
         }
+    }
+
+
+    @GetMapping("/find/{title}")
+    public Lesson getByTitle(@PathVariable("title") String title){
+        return this.repository.byTitle(title);
+    }
+
+    @GetMapping("/between")
+    public Lesson getbetween(@RequestParam("date1") String date1, @RequestParam("date2") String date2) throws ParseException {
+        Date dateF =new SimpleDateFormat("yyyy-MM-dd").parse(date1);
+        Date dateL =new SimpleDateFormat("yyyy-MM-dd").parse(date2);
+        return this.repository.betweenDates(dateF, dateL);
     }
 
 
