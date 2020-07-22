@@ -10,4 +10,5 @@ public interface LessonRepository extends CrudRepository<Lesson, Long> {
 
     @Query(value = "DELETE * FROM lessons WHERE id = :id", nativeQuery = true)
     public Lesson deletebyId(Long id);
+
 }
