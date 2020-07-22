@@ -29,5 +29,11 @@ public class LessonsController {
         return this.repository.byId(id);
     }
 
+    @DeleteMapping("/{id}")
+    public void deletelesson(@PathVariable("id") Long id) {
+        this.repository.deleteById(id);
+    }
+
+
 
 }
